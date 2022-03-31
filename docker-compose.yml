@@ -1,0 +1,41 @@
+version: '3'
+
+volumes:
+  db-store:
+
+services:
+  #MySQL用コンテナ
+  mysql:
+    container_name: mysql-crud
+    image: mysql:5.7
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: m1ndfulness!
+      MYSQL_USER: crud
+      MYSQL_PASSWORD: crud
+
+  #phpMyAdmin用コンテナ
+  phpmyadmin:
+    container_name: phpMyAdmin-crud
+    depends_on:
+      - mysql-crud
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql-crud
+    restart: always
+    ports:
+      - '81:80'
+
+  #php用コンテナ
+  php:
+    container_name: php-apache-crud
+    build: ./php
+    volumes:
+      - ./html:/var/www/html
+    ports:
+      - 8081:80
+    depends_on:
+      - mysql-crud
