@@ -12,7 +12,8 @@
 
 
     <body>
-        <form action="" method="POST">
+        <?php require_once './process.php'; ?>
+        <form action="process.php" method="POST">
             <label>Name</label>
             <input type="text" name="name" value="Enter your name">
             <label>Location</label>
