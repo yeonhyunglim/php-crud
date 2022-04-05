@@ -5,20 +5,31 @@
     <head>
         <meta charset="UTF-8">
         <title>PHP CRUD</title>
-        <script src="https://code.jquery.com/jquery-2.1.3.min.js"><script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
     </head>
 
 
     <body>
         <?php require_once './process.php'; ?>
+        <div class="row justify-content-center">
         <form action="process.php" method="POST">
+            <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" value="Enter your name">
+            <input type="text" name="name" class ="form-control" value="Enter your name">
+            </div>
+            <div class="form-group">
             <label>Location</label>
-            <input type="text" name="location" value="Enter your location">
-            <button type="submit" name="save">Save</button>
-            </form>
+            <input type="text" name="location" class="form-control" value="Enter your location">
+            </div>
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="save">Save</button>
+            </div>
+        </form>
+        </div>
+        <!-- bootstrap js -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     </body>
 </html>
