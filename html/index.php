@@ -1,9 +1,10 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 
 
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title>PHP CRUD</title>
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -14,13 +15,23 @@
     <body>
         <?php require_once './process.php'; ?>
         <?php
-            $host = "127.0.0.1";
-            $port = "3308";
+
+        if (isset($_SESSION['message'])): ?>
+        
+        <div class="alert alert-<?=$_SESSION['msg_type']?>">
+            <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+            ?>
+        </div>
+        <?php endif ?>
+        <div class="container">
+        <?php
             $mysqli = new mysqli("mysql:3306", 'crud', 'crud', 'crud') or die(mysqli_error($mysqli));
             $result = $mysqli->query("SELECT * FROM data") or die($mysqli->error);
             //pre_r($result);
             ?>
-            <div class="container justify-content-center">
+            <div class="row justify-content-center">
                 <table class="table">
                     <thead>
                         <tr>
@@ -35,7 +46,7 @@
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['location']; ?></td>
                     <td>
-                        <a href="./index.php?edit=<?php echo $row['id']; ?>"
+                        <a href="./index.php?edit=<?php echo $row['id']; ?>" 
                            class="btn btn-info">Edit</a>
                         <a href="./process.php?delete=<?php echo $row['id']; ?>"
                            class="btn btn-danger">Delete</a>
@@ -66,6 +77,7 @@
             <button type="submit" class="btn btn-primary" name="save">Save</button>
             </div>
         </form>
+        </div>
         </div>
         <!-- bootstrap js -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
